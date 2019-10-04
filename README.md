@@ -34,7 +34,6 @@ mnt/
     │   └── media-cache
     └── media
         ├── Movies
-        ├── Movies-3d
         ├── Movies-Kids
         ├── Music
         └── TV
