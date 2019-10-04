@@ -64,13 +64,11 @@ opt/
 
 Once you're done, nginx will be sitting on your host in a reverse proxy configuration. You can access your services via their port using http://${HOSTNAME}:${PORT}, or using http://${HOSTNAME}/${SERVICE}
 
-As an example, to access Tautulli, you would use:
-&nbsp;
-&nbsp;
-http://your.hostname.here:8181 &nbsp;
-or &nbsp;
-http://your.hostname.here/tautulli &nbsp;
-&nbsp;
+As an example, to access Tautulli, you would use:  
+http://your.hostname.here:8181  
+or  
+http://your.hostname.here/tautulli  
+
 You'll have to log into each service and configure the reverse proxy base URL. Good luck!
 
 
