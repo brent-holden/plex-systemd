@@ -61,13 +61,13 @@ opt/
 └── tautulli
 ```
 
-Once you're done, nginx will be sitting on your host in a reverse proxy configuration. You can access your services via their port using http://${HOSTNAME}:${PORT}, or using https://${HOSTNAME}/${SERVICE}
+Once you're done, nginx will be sitting on your host in a reverse proxy configuration. You can access your services via their port using http://${HOSTNAME}:${PORT}, or using http://${HOSTNAME}/${SERVICE}
 
-As an example, to access Tautulli, you would use:
-http://your.hostname.here:8181
-or
-http://your.hostname.here/tautulli
+As an example, to access Tautulli, you would use:  
+http://your.hostname.here:8181  
+or  
+http://your.hostname.here/tautulli  
 
-You'll have to log into each service and configure the reverse proxy base URL. Good luck!
+You'll have to log into each service and configure the reverse proxy base URL. I have included a [sample nginx configuration](nginx/default.example) in this repository. Good luck!
 
 
