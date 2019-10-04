@@ -7,7 +7,7 @@ Clone this repository using:
 $ git clone https://github.com/brent-holden/plex-scripts.git
 ```
 
-Before running the next commands, you'll need to make sure you have a valid rclone configuration. You can find the instructions on how to do that on the [RClone Drive instructions](https://rclone.org/drive/). I've included an [example rclone configuration file](../rclone/rclone.conf) for reference in this repository.
+Before running the next commands, you'll need to make sure you have a valid rclone configuration. You can find the instructions on how to do that on the [RClone Drive instructions](https://rclone.org/drive/). I've included an [example rclone configuration file](rclone/rclone.conf.example) for reference in this repository.
 
 The setup_rclone.sh script assumes you're running with access to sudo. This script will create a user 'plex' for you with uid/gid 1100. RClone will have permissions set to allow this user for our rclone drive(s), and on the directories we create in /opt and /mnt
 ```console
