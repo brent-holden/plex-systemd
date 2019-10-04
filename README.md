@@ -3,19 +3,21 @@ This is a collection of scripts and systemd configurations I used to setup Plex 
 
 
 Clone this repository using:
-```shell
+```console
 $ git clone https://github.com/brent-holden/plex-scripts.git
 ```
 
+Before running the next commands, you'll need to make sure you have a valid rclone configuration. You can find the instructions on how to do that on the RClone Drive instructions. I've included an example file for reference in the rclone directory.
+
 The setup_rclone.sh script assumes you're running with access to sudo. This script will create a user 'plex' for you with uid/gid 1100. RClone will have permissions set to allow this user for our rclone drive(s), and on the directories we create in /opt and /mnt
-```shell
+```console
 $ cd plex-scripts/scripts
 $ ./setup_rclone.sh
 ```
 My Google drive has two directories in /, Media and Backups. The rclone-media-drive mounts /Media, and rclone-backup-drive mounts /Backups
 
 Here's what my /mnt directory looks like once setup_rclone.sh is run:
-```shell
+```console
 mnt/
 ├── downloads
 └── rclone
@@ -42,13 +44,13 @@ mnt/
 
 Assuming you have backups in the appropriate folders, the restore_services script will look for backup-$SERVICE-latest.tar.gz and untar it into the appropriate directory in /opt. If you don't have any backups, it will fail the tar stages but continue and setup all of the systemd service files for you. restore-services will also put your server in the default firewall zone of 'trusted' which means every port will be exposed. If that's undesirable for you, you'll have to work out the correct ports to add via firewalld.
 
-```shell
-./restore_services.sh
+```console
+$ ./restore_services.sh
 
 ```
 
 Here's what /opt looks like:
-```shell
+```console
 opt/
 ├── hydra2
 ├── letsencrypt
