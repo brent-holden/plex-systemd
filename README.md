@@ -36,7 +36,6 @@ mnt/
     │   └── media-cache
     └── media
         ├── Movies
-        ├── Movies-Kids
         ├── Music
         └── TV
 ```
