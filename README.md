@@ -69,6 +69,6 @@ http://your.hostname.here:8181
 or  
 http://your.hostname.here/tautulli  
 
-You'll have to log into each service and configure the reverse proxy base URL. Good luck!
+You'll have to log into each service and configure the reverse proxy base URL. I have included a [sample nginx configuration](nginx/default.example) in this repository. Good luck!
 
 
