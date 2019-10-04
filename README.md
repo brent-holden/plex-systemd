@@ -7,7 +7,7 @@ Clone this repository using:
 $ git clone https://github.com/brent-holden/plex-scripts.git
 ```
 
-Before running the next commands, you'll need to make sure you have a valid rclone configuration. You can find the instructions on how to do that on the RClone Drive instructions. I've included an example file for reference in the rclone directory.
+Before running the next commands, you'll need to make sure you have a valid rclone configuration. You can find the instructions on how to do that on the [RClone Drive instructions](https://rclone.org/drive/). I've included an [example rclone configuration file](../rclone/rclone.conf) for reference in this repository.
 
 The setup_rclone.sh script assumes you're running with access to sudo. This script will create a user 'plex' for you with uid/gid 1100. RClone will have permissions set to allow this user for our rclone drive(s), and on the directories we create in /opt and /mnt
 ```console
@@ -40,8 +40,6 @@ mnt/
         ├── Music
         └── TV
 ```
-
-
 Assuming you have backups in the appropriate folders, the restore_services script will look for backup-$SERVICE-latest.tar.gz and untar it into the appropriate directory in /opt. If you don't have any backups, it will fail the tar stages but continue and setup all of the systemd service files for you. restore-services will also put your server in the default firewall zone of 'trusted' which means every port will be exposed. If that's undesirable for you, you'll have to work out the correct ports to add via firewalld.
 
 ```console
@@ -64,6 +62,6 @@ opt/
 └── tautulli
 ```
 
-Once you're done, nginx will be sitting on a reverse proxy on your host. You can access your services via their port, or https://${HOSTNAME}/service, like https://${HOSTNAME}/tautulli
+Once you're done, nginx will be sitting on your host in a reverse proxy configuration. You can access your services via their port, or https://${HOSTNAME}/service, like https://${HOSTNAME}/tautulli
 
 
