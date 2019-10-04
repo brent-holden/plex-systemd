@@ -63,6 +63,6 @@ opt/
 └── tautulli
 ```
 
-Once you're done, nginx will be sitting on a reverse proxy on your host. You can access your services via their port, or ${HOSTNAME}/service, like ${HOSTNAME}/tautulli
+Once you're done, nginx will be sitting on a reverse proxy on your host. You can access your services via their port, or https://${HOSTNAME}/service, like https://${HOSTNAME}/tautulli
 
 
