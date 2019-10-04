@@ -32,6 +32,7 @@ echo "Copying service files over"
 sudo cp $SYSTEMDSVCFILESDIR/rclone* $SYSTEMDDIR
 sudo systemctl daemon-reload
 
+echo "Enabling and starting rclone services"
 sudo systemctl enable rclone-media-drive
 sudo systemctl start rclone-media-drive
 
