@@ -2,13 +2,6 @@
 
 source variables.sh
 
-sudo yum install -y vim
-sudo adduser $PLEXUSER --uid=$PLEXUID -U
-sudo mkdir -p $DOWNLOADSDIR
-sudo mkdir -p $RCLONEMEDIADIR
-sudo mkdir -p $RCLONEBACKUPDIR
-sudo mkdir -p $RCLONECONFIGDIR
-
 read -p "Point me to rclone.conf (default value: /root/.config/rclone/rclone.conf): " RCLONECONF
 RCLONECONF=${RCLONECONF:-/root/.config/rclone/rclone.conf}
 
@@ -19,8 +12,23 @@ else
 	sudo cp $RCLONECONF $RCLONECONFIGDIR
 fi
 
+echo "Installing vim"
+sudo yum install -y vim
+
+echo "Adding $PLEXUSER with UID:$PLEXUID"
+sudo adduser $PLEXUSER --uid=$PLEXUID -U
+
+echo "Making service directories"
+sudo mkdir -p $DOWNLOADSDIR
+sudo mkdir -p $RCLONEMEDIADIR
+sudo mkdir -p $RCLONEBACKUPDIR
+sudo mkdir -p $RCLONECONFIGDIR
+
+
+echo "Installing rclone"
 sudo yum install -y https://downloads.rclone.org/rclone-current-linux-amd64.rpm
 
+echo "Copying service files over"
 sudo cp $SYSTEMDSVCFILESDIR/rclone* $SYSTEMDDIR
 sudo systemctl daemon-reload
 
