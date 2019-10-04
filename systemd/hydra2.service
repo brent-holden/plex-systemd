@@ -1,0 +1,16 @@
+[Unit]
+Description=Hydra v2 (Indexer Aggregator)
+After=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStartPre=-/usr/bin/podman rm -f hydra2
+ExecStart=/usr/bin/podman run --security-opt label=disable --name=hydra2 --mount type=bind,source=/mnt/downloads,target=/downloads,bind-propagation=rslave --mount type=bind,source=/opt/hydra2,target=/config -e PGID=1100 -e PUID=1100 --network=host --systemd=false --rm linuxserver/hydra2
+ExecStop=/usr/bin/podman stop hydra2
+ExecReload=/usr/bin/podman restart hydra2
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

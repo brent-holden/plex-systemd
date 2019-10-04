@@ -1,0 +1,18 @@
+[Unit]
+Description=rClone (Google Drive)
+AssertPathIsDirectory=/mnt/rclone/media
+AssertPathIsDirectory=/mnt/rclone/cache-db
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/bin/rclone mount --config /opt/rclone/rclone.conf --vfs-cache-mode writes --allow-other --gid 1100 --uid 1100 --dir-cache-time 96h --cache-info-age 97h --fast-list --cache-db-path /mnt/rclone/cache-db media-cache: /mnt/rclone/media
+
+ExecStop=/bin/fusermount -uz /mnt/rclone/media
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

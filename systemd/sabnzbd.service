@@ -1,0 +1,17 @@
+[Unit]
+Description=SABnzbd (NZB Downloading Service)
+After=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStartPre=-/usr/bin/podman rm -f sabnzbd
+ExecStart=/usr/bin/podman run --security-opt label=disable --name=sabnzbd --mount type=bind,source=/mnt/downloads,target=/downloads,bind-propagation=rslave --mount type=bind,source=/opt/sabnzbd,target=/config -e PGID=1100 -e PUID=1100 --network=host --systemd=false linuxserver/sabnzbd
+ExecStop=/usr/bin/podman stop sabnzbd
+ExecStopPost=/usr/bin/podman rm sabnzbd -f
+ExecReload=/usr/bin/podman restart sabnzbd
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

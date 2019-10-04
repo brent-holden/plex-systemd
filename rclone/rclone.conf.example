@@ -1,0 +1,21 @@
+[google-drive]
+type = drive
+client_id = <client id>
+client_secret = <client sekrit>
+scope = drive
+token = {"access_token":"<access token>","token_type":"Bearer","refresh_token":"<refresh token>","expiry":"<expiry>"}
+
+[media-cache]
+type = cache
+remote = google-drive:/Media
+chunk_size = 128M
+plex_url = <plex direct url>
+plex_username = <plex username>
+plex_password = <plex encrypted password>
+plex_token = <plex token>
+
+[backup-cache]
+type = cache
+remote = google-drive:/Backups
+chunk_size = 8M
+

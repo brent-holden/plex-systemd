@@ -1,0 +1,16 @@
+[Unit]
+Description=rClone Web UI
+After=rclone-media-drive.service
+Requires=rclone-media-drive.service
+BindsTo=rclone-media-drive.service
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/bin/rclone rcd --config /opt/rclone/rclone.conf --rc-web-gui --rc-addr :3030 --rc-user brent --rc-pass phalanx
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+WantedBy=rclone-media-drive.service
