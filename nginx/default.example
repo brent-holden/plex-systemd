@@ -1,0 +1,38 @@
+server {
+	listen 80 default_server;
+
+	root /config/www;
+	index index.html index.htm index.php;
+	server_name _;
+
+	client_max_body_size 0;
+
+	location / {
+		try_files $uri $uri/ /index.html /index.php?$args =404;
+	}
+
+	location /sabnzbd {
+		proxy_pass http://localhost:8080;
+	}
+
+	location /tautulli {
+		proxy_pass http://localhost:8181;
+	}
+
+	location /hydra2 {
+		proxy_pass http://localhost:5076;
+	}
+
+	location /sonarr {
+		proxy_pass http://localhost:8989;
+	}
+
+	location /radarr {
+		proxy_pass http://localhost:7878;
+	}
+
+	location /lidarr {
+		proxy_pass http://localhost:8686;
+	}
+
+}
