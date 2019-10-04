@@ -2,25 +2,37 @@
 
 source variables.sh
 
-sudo yum install -y vim
-sudo adduser $PLEXUSER --uid=$PLEXUID -U
-sudo mkdir -p /mnt/downloads
-sudo mkdir -p /mnt/rclone/{media,backup,cache,cache-db}
-sudo mkdir -p /opt/rclone
+read -p "Point me to rclone.conf (default value: /root/.config/rclone/rclone.conf): " RCLONECONF
+RCLONECONF=${RCLONECONF:-/root/.config/rclone/rclone.conf}
 
-read -p "Point me to rclone.conf (ex. /root/.config/rclone/rclone.conf): " RCLONECONF
 if [ ! -f "$RCLONECONF" ]; then
 	echo "File not found. Exiting"
 	exit 1
 else
-	sudo cp $RCLONECONF /opt/rclone
+	sudo cp $RCLONECONF $RCLONECONFIGDIR
 fi
 
+echo "Installing vim"
+sudo yum install -y vim
+
+echo "Adding $PLEXUSER with UID:$PLEXUID"
+sudo adduser $PLEXUSER --uid=$PLEXUID -U
+
+echo "Making service directories"
+sudo mkdir -p $DOWNLOADSDIR
+sudo mkdir -p $RCLONEMEDIADIR
+sudo mkdir -p $RCLONEBACKUPDIR
+sudo mkdir -p $RCLONECONFIGDIR
+
+
+echo "Installing rclone"
 sudo yum install -y https://downloads.rclone.org/rclone-current-linux-amd64.rpm
 
-sudo cp ../systemd/rclone* /usr/lib/systemd/system
+echo "Copying service files over"
+sudo cp $SYSTEMDSVCFILESDIR/rclone* $SYSTEMDDIR
 sudo systemctl daemon-reload
 
+echo "Enabling and starting rclone services"
 sudo systemctl enable rclone-media-drive
 sudo systemctl start rclone-media-drive
 

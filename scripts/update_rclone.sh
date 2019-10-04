@@ -18,6 +18,7 @@ if [ $CURRENTVER != $DOWNLOADVER ]; then
 	sudo yum install -y $TMPDIR/$RCLONERPM
 	sudo systemctl restart rclone-media-drive
 	sudo systemctl restart rclone-backup-drive
+	sudo systemctl restart rclone-web
 fi
 
 #Clean up after ourselves

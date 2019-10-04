@@ -3,12 +3,13 @@
 source variables.sh
 
 # Test to make sure rclone is mounted or exit
-if $(mountpoint -q "$RCLONEDIR"); then
-    echo "$RCLONEDIR is mounted. Let's do this"
+if $(mountpoint -q "$RCLONEBACKUPDIR"); then
+    echo "$RCLONEBACKUPDIR is mounted. Let's do this"
 else
-    echo "$RCLONEDIR is not a mounted. Exiting"
+    echo "$RCLONEBACKUPDIR is not a mounted. Exiting"
     exit 1
 fi
+
 CWD=$(pwd)
 SERVICE=letsencrypt
 FILENAME=backup-$SERVICE-$DATE.tar.gz
@@ -21,15 +22,15 @@ cd $SRCDIR
 
 # Create the backup file
 echo "Backing up $SRCDIR"
-tar -cpzf $TMPDIR/$FILENAME . 2>/dev/null
+sudo tar -cpzf $TMPDIR/$FILENAME . 2>/dev/null
 
 # Move it to the right place
 echo "Moving $FILENAME to $DESTDIR"
-mv $TMPDIR/$FILENAME $DESTDIR 
+sudo mv $TMPDIR/$FILENAME $DESTDIR 
 
 # Copy to a latest release because softlinks don't work yet
-cp $DESTDIR/$FILENAME $DESTDIR/$LATEST
+sudo cp $DESTDIR/$FILENAME $DESTDIR/$LATEST
 
 # Remove all backups older than 30 days
-find $RCLONEDIR/$SERVICE -type f -name '*.tar.gz' -mtime +30 -exec rm {} \;
+sudo find $RCLONEDIR/$SERVICE -type f -name '*.tar.gz' -mtime +30 -exec rm {} \;
 cd $CWD

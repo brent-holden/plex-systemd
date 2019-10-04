@@ -3,10 +3,10 @@
 source variables.sh
 
 # Test to make sure we're mounted or exit
-if $(mountpoint -q "$RCLONEDIR"); then
-    echo "$RCLONEDIR is mounted. Let's do this"
+if $(mountpoint -q "$RCLONEBACKUPDIR"); then
+    echo "$RCLONEBACKUPDIR is mounted. Let's do this"
 else
-    echo "$RCLONEDIR is not a mounted. Exiting"
+    echo "$RCLONEBACKUPDIR is not a mounted. Exiting"
     exit 1
 fi
 
@@ -16,7 +16,7 @@ cd $TMPDIR
 # Loop over services defined
 SERVICE=letsencrypt
 LATEST=backup-$SERVICE-latest.tar.gz
-SRCDIR=$RCLONEDIR/$SERVICE
+SRCDIR=$RCLONEBACKUPDIR/$SERVICE
 DESTDIR=$OPTDIR/$SERVICE
 
 # Create the service directory
