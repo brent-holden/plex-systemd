@@ -4,21 +4,24 @@ source variables.sh
 
 sudo yum install -y vim
 sudo adduser $PLEXUSER --uid=$PLEXUID -U
-sudo mkdir -p /mnt/downloads
-sudo mkdir -p /mnt/rclone/{media,backup,cache,cache-db}
-sudo mkdir -p /opt/rclone
+sudo mkdir -p $DOWNLOADSDIR
+sudo mkdir -p $RCLONEMEDIADIR
+sudo mkdir -p $RCLONEBACKUPDIR
+sudo mkdir -p $RCLONECONFIGDIR
 
-read -p "Point me to rclone.conf (ex. /root/.config/rclone/rclone.conf): " RCLONECONF
+read -p "Point me to rclone.conf (default value: /root/.config/rclone/rclone.conf): " RCLONECONF
+RCLONECONF=${RCLONECONF:-/root/.config/rclone/rclone.conf}
+
 if [ ! -f "$RCLONECONF" ]; then
 	echo "File not found. Exiting"
 	exit 1
 else
-	sudo cp $RCLONECONF /opt/rclone
+	sudo cp $RCLONECONF $RCLONECONFIGDIR
 fi
 
 sudo yum install -y https://downloads.rclone.org/rclone-current-linux-amd64.rpm
 
-sudo cp ../systemd/rclone* /usr/lib/systemd/system
+sudo cp $SYSTEMDSVCFILESDIR/rclone* $SYSTEMDDIR
 sudo systemctl daemon-reload
 
 sudo systemctl enable rclone-media-drive
