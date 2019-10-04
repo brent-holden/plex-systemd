@@ -32,18 +32,23 @@ tar -zxf $TMPDIR/$LATEST --directory $DESTDIR
 # Copy service file over
 echo "Copying $SERVICE.service"
 cp $SYSTEMDFILESDIR/$SERVICE.service $SYSTEMDDIR
-
 echo "Done extracting files"
+
+systemctl daemon-reload
+
+# Enable and start services
+systemctl enable $SERVICE
+systemctl start $SERVICE
 
 done
 
 # Change directory ownership
 chown -R $PLEXUSER.$PLEXUSER $OPTDIR
 
-# Executing a systemd daemon reload
-systemctl daemon-reload
-
 # Copy in cron job to /etc/cron.d
 source setup_cron.sh
+
+# Set default zone to trusted assuming you're on a private net behind a firewall
+sudo firewall-cmd --set-default-zone=trusted
 
 echo "Done"
