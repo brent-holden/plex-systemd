@@ -8,7 +8,7 @@ BindsTo=rclone-media-drive.service
 Type=simple
 User=root
 Group=root
-ExecStart=/usr/bin/rclone rcd --config /opt/rclone/rclone.conf --rc-web-gui --rc-addr :3030 --rc-user brent --rc-pass password
+ExecStart=/usr/bin/rclone rcd --config /opt/rclone/rclone.conf --rc-web-gui --rc-addr :3030 --rc-user admin --rc-pass password
 Restart=always
 
 [Install]
