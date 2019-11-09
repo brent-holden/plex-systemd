@@ -15,8 +15,8 @@ CWD=$(pwd)
 for SERVICE in "${SERVICES[@]}"; do
 
 # Define variables per service
-FILENAME=backup-$SERVICE-$DATE.tar.gz
-LATEST=backup-$SERVICE-latest.tar.gz
+FILENAME=backup_$SERVICE_$DATE.tar.gz
+LATEST=backup_$SERVICE_latest.tar.gz
 SRCDIR=$OPTDIR/$SERVICE
 DESTDIR=$RCLONEBACKUPDIR/$SERVICE
 
