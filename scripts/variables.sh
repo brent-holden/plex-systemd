@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SERVICES=(lidarr sonarr radarr tautulli hydra2 sabnzbd nginx plex)
+SERVICES=(lidarr sonarr radarr tautulli hydra2 sabnzbd ombi nginx plex)
 DATE=`date +%d-%m-%Y`
 OPTDIR=/opt
 TMPDIR=/tmp
