@@ -1,5 +1,5 @@
 [Unit]
-Description=NGINX (Reverse Proxy)
+Description=NGINX (Reverse Proxy using LetsEncrypt)
 After=network-online.target
 
 [Service]
@@ -7,7 +7,7 @@ Type=simple
 User=root
 Group=root
 ExecStartPre=-/usr/bin/podman rm -f nginx
-ExecStart=/usr/bin/podman run --security-opt label=disable --name=nginx --mount type=bind,source=/opt/nginx,target=/config,bind-propagation=rslave --mount type=bind,source=/opt/letsencrypt,target=/opt/letsencrypt,bind-propagation=rslave -e PGID=1100 -e PUID=1100 -e TZ=America/New_York --network=host --systemd=false --rm linuxserver/nginx
+ExecStart=/usr/bin/podman run --security-opt label=disable --name=nginx --mount type=bind,source=/opt/nginx,target=/config,bind-propagation=rslave -e PGID=1100 -e PUID=1100 -e TZ=America/New_York -e URL=wan.foresi.de -e VALIDATION=http --network=host --systemd=false --rm linuxserver/letsencrypt
 ExecStop=/usr/bin/podman stop nginx
 ExecReload=/usr/bin/podman restart nginx
 Restart=always

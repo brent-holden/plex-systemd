@@ -1,8 +1,6 @@
 [Unit]
 Description=Ombi (Download Request Service)
-Requires=plex.service
-After=plex.service nginx.service
-BindsTo=nginx.service
+After=radarr.service lidarr.service sonarr.service
 
 [Service]
 Type=simple
@@ -16,4 +14,3 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-WantedBy=nginx.service
