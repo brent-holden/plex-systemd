@@ -35,5 +35,10 @@ sudo systemctl start rclone-media-drive
 sudo systemctl enable rclone-backup-drive
 sudo systemctl start rclone-backup-drive
 
+echo "Waiting 5 seconds for rClone to start"
+sleep 5
+
 sudo systemctl enable rclone-web
 sudo systemctl start rclone-web
+
+echo "rClone Installed"
