@@ -12,9 +12,6 @@ else
 	sudo cp $RCLONECONF $RCLONECONFIGDIR
 fi
 
-echo "Installing vim"
-sudo yum install -y vim
-
 echo "Adding $PLEXUSER with UID:$PLEXUID"
 sudo adduser $PLEXUSER --uid=$PLEXUID -U
 
