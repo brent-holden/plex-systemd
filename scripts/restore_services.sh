@@ -1,54 +1,51 @@
 #!/usr/bin/env bash
 
-source variables.sh
+source ${BASH_SOURCE%/*}/variables.sh
 
 # Test to make sure we're mounted or exit
 if $(mountpoint -q "$RCLONEBACKUPDIR"); then
-    echo "$RCLONEBACKUPDIR is mounted. Let's do this"
+    echo "$RCLONEBACKUPDIR is mounted. Let's do this!"
 else
     echo "$RCLONEBACKUPDIR is not a mounted. Exiting"
     exit 1
 fi
+
+read -p "Set of backups to restore in DD-MM-YYYY (e.g. 13-01-2019) (default value: latest): " BACKUPDATE
+BACKUPDATE=${BACKUPDATE:-latest}
 
 # Change to temporary dir
 cd $TMPDIR
 
 # Loop over services defined
 for SERVICE in "${SERVICES[@]}"; do
-LATEST=backup-$SERVICE-latest.tar.gz
+
+# Set some variables
+LATEST=backup_$BACKUPDATE.tar.gz
 SRCDIR=$RCLONEBACKUPDIR/$SERVICE
 DESTDIR=$OPTDIR/$SERVICE
 
-# Create the service directory
-sudo mkdir -p $DESTDIR
+# Stop service before config restoration
+echo "Stopping $SERVICE"
+sudo systemctl stop $SERVICE
 
 # Copy the backup over locally
-cp $SRCDIR/$LATEST $TMPDIR
+echo "Copying over backup $SRCDIR/$LATEST to $TMPDIR"
+sudo rsync --info=progress $SRCDIR/$LATEST $TMPDIR
+#cp $SRCDIR/$LATEST $TMPDIR
 
 # Extract the backup file
 echo "Extracting backup to $DESTDIR"
 sudo tar -zxf $TMPDIR/$LATEST --directory $DESTDIR
-
-# Copy service file over
-echo "Copying $SERVICE.service"
-sudo cp $SYSTEMDSVCFILESDIR/$SERVICE.service $SYSTEMDDIR
 echo "Done extracting files"
 
-sudo systemctl daemon-reload
+# Change directory ownership
+echo "Changing directory ownership of $DESTDIR to $PLEXUSER.$PLEXGROUP"
+sudo chown -R $PLEXUSER.$PLEXUSER $DESTDIR
 
-# Enable and start services
-sudo systemctl enable $SERVICE
+# Start service
+echo "Starting $SERVICE"
 sudo systemctl start $SERVICE
 
 done
 
-# Change directory ownership
-sudo chown -R $PLEXUSER.$PLEXUSER $OPTDIR
-
-# Copy in cron job to /etc/cron.d
-source setup_cron.sh
-
-# Set default zone to trusted assuming you're on a private net behind a firewall
-sudo firewall-cmd --set-default-zone=trusted
-
-echo "Done"
+echo "Finished restoring services from backup $BACKUPDATE"

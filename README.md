@@ -1,17 +1,19 @@
 # plex-scripts
-This is a collection of scripts and systemd configurations I used to setup Plex and associated services using podman on CentOS 8
+This is a collection of scripts and systemd configurations I used to setup Plex and associated services which has been tested on CentOS 7/8
 
+All scripts use 'sudo' and it's presumed you've cloned this repo into an account that has access to sudo, .
 
 Clone this repository using:
 ```console
+$ mkdir Code && cd "$_"
 $ git clone https://github.com/brent-holden/plex-scripts.git
+$ cd plex-scripts
 ```
 
 Before running the next commands, you'll need to make sure you have a valid rclone configuration. You can find the instructions on how to do that on the [RClone Drive instructions](https://rclone.org/drive/). I've included an [example rclone configuration file](rclone/rclone.conf.example) for reference in this repository.
 
 The setup_rclone.sh script assumes you're running with access to sudo. This script will create a user 'plex' for you with uid/gid 1100. RClone will have permissions set to allow this user for our rclone drive(s), and on the directories we create in /opt and /mnt
 ```console
-$ cd plex-scripts/scripts
 $ ./setup_rclone.sh
 ```
 My Google drive has two directories in /, Media and Backups. The rclone-media-drive mounts /Media, and rclone-backup-drive mounts /Backups

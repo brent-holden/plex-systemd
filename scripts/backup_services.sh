@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source variables.sh
+source ${BASH_SOURCE%/*}/variables.sh
 
 # Test to make sure rclone is mounted or exit
 if $(mountpoint -q "$RCLONEBACKUPDIR"); then
@@ -15,8 +15,8 @@ CWD=$(pwd)
 for SERVICE in "${SERVICES[@]}"; do
 
 # Define variables per service
-FILENAME=backup_$SERVICE_$DATE.tar.gz
-LATEST=backup_$SERVICE_latest.tar.gz
+FILENAME=backup_$DATE.tar.gz
+LATEST=backup_latest.tar.gz
 SRCDIR=$OPTDIR/$SERVICE
 DESTDIR=$RCLONEBACKUPDIR/$SERVICE
 

@@ -14,3 +14,4 @@ SYSTEMDSVCFILESDIR=../systemd
 SYSTEMDDIR=/usr/lib/systemd/system
 PLEXUSER=plex
 PLEXUID=1100
+PLEXGROUP=plex
