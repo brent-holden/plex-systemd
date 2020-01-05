@@ -6,10 +6,8 @@ read -p "Point me to rclone.conf (default value: /root/.config/rclone/rclone.con
 RCLONECONF=${RCLONECONF:-/root/.config/rclone/rclone.conf}
 
 if [ ! -f "$RCLONECONF" ]; then
-	echo "File not found. Exiting"
-	exit 1
-else
-	sudo cp $RCLONECONF $RCLONECONFIGDIR
+  echo "File not found. Exiting"
+  exit 1
 fi
 
 echo "Adding $PLEXUSER with UID:$PLEXUID"
@@ -21,6 +19,7 @@ sudo mkdir -p $RCLONEMEDIADIR
 sudo mkdir -p $RCLONEBACKUPDIR
 sudo mkdir -p $RCLONECONFIGDIR
 
+sudo cp $RCLONECONF $RCLONECONFIGDIR
 
 echo "Installing rclone"
 sudo yum install -y https://downloads.rclone.org/rclone-current-linux-amd64.rpm

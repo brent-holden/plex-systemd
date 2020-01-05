@@ -11,6 +11,6 @@ RCLONEBACKUPDIR=$RCLONEDIR/backup
 RCLONECONFIGDIR=$OPTDIR/rclone
 DOWNLOADSDIR=/mnt/downloads
 SYSTEMDSVCFILESDIR=../systemd
-SYSTEMDDIR=/usr/lib/systemd/systemd
+SYSTEMDDIR=/usr/lib/systemd/system
 PLEXUSER=plex
 PLEXUID=1100
