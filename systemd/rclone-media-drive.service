@@ -1,5 +1,5 @@
 [Unit]
-Description=rClone (Google Drive)
+Description=rClone (Media Folder)
 AssertPathIsDirectory=/mnt/rclone/media
 AssertPathIsDirectory=/mnt/rclone/cache-db
 Wants=network-online.target
