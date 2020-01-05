@@ -41,7 +41,6 @@ sleep 5
 sudo systemctl enable rclone-web
 sudo systemctl start rclone-web
 
-# Set default zone to trusted assuming you're on a private net behind a firewall
-sudo firewall-cmd --set-default-zone=trusted
-
 echo "rClone Installed"
+
+

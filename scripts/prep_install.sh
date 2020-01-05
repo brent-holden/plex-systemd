@@ -2,26 +2,14 @@
 
 source ${BASH_SOURCE%/*}/variables.sh
 
-# Test to make sure we're mounted or exit
-if $(mountpoint -q "$RCLONEBACKUPDIR"); then
-    echo "$RCLONEBACKUPDIR is mounted. Let's do this"
-else
-    echo "$RCLONEBACKUPDIR is not a mounted. Exiting"
-    exit 1
-fi
+# Add the plex user and group with specified UID before doing anything
+echo "Adding $PLEXUSER with UID:$PLEXUID"
+sudo adduser $PLEXUSER --uid=$PLEXUID -U
 
-# Loop over services defined
-for SERVICE in "${SERVICES[@]}"; do
+# Install packages needed
+echo "Installing packages: $PACKAGES"
+sudo yum -y install $PACKAGES
 
-SVCCONFDIR=$OPTDIR/$SERVICE
-BACKUPDIR=$RCLONEBACKUPDIR/$SERVICE
-
-echo "Creating $BACKUPDIR"
-# Create the service backup directory
-sudo mkdir -p $BACKUPDIR
-sudo chown -R $PLEXUSER.$PLEXUSER $BACKUPDIR
-
-done
-
-sudo yum -y install vim rsync
+# Set default zone to trusted assuming you're on a private net behind a firewall
+sudo firewall-cmd --set-default-zone=trusted
 
