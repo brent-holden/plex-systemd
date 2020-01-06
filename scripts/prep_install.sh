@@ -13,3 +13,6 @@ sudo yum -y install $PACKAGES
 # Set default zone to trusted assuming you're on a private net behind a firewall
 sudo firewall-cmd --set-default-zone=trusted
 
+# Disable SELinux because reasons
+echo "Disabling SELinux. This will require a reboot to take effect"
+sudo sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/sysconfig/selinux
