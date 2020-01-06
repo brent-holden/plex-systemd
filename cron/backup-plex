@@ -1,2 +1,2 @@
-35 4 * * * root /home/brent/Code/plex-scripts/scripts/backup_and_update.sh >/dev/null 2>&1
+35 4 * * * root %%SCRIPT_REPO%%/backup_and_update.sh >/dev/null 2>&1
 
