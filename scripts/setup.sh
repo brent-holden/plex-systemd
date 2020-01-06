@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Prep system for install
 source ${BASH_SOURCE%/*}/prep_install.sh
