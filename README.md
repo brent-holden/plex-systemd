@@ -18,11 +18,11 @@ The setup.sh script assumes you're running with access to sudo. This script will
 
 
 ```console
-$ ./setup_rclone.sh
+$ ./setup.sh
 ```
 My Google drive has two directories in /, Media and Backups. The rclone-media-drive mounts /Media, and rclone-backup-drive mounts /Backups
 
-Here's what my /mnt directory looks like once setup_rclone.sh is run:
+Here's what my /mnt directory looks like once setup.sh is run:
 ```console
 mnt/
 ├── downloads
@@ -45,14 +45,10 @@ mnt/
         ├── Music
         └── TV
 ```
-Assuming you have backups in the appropriate folders, the restore_services script will look for backup-$SERVICE-latest.tar.gz and untar it into the appropriate directory in /opt. If you don't have any backups, it will fail the tar stages but continue and setup all of the systemd service files for you. restore-services will also put your server in the default firewall zone of 'trusted' which means every port will be exposed. If that's undesirable for you, you'll have to work out the correct ports to add via firewalld.
 
-```console
-$ ./restore_services.sh
-
-```
 
 Here's what /opt looks like:
+
 ```console
 opt/
 ├── hydra2
@@ -66,6 +62,9 @@ opt/
 ├── sonarr
 └── tautulli
 ```
+
+Assuming you have backups in the appropriate folders, the restore_services script will look for backup_latest.tar.gz and untar it into the appropriate directory in /opt. If you don't have any backups, it will fail during the untar but will continue and setup all of the systemd service files for you.
+
 
 Once you're done, nginx will be sitting on your host in a reverse proxy configuration. You can access your services via their port using http://${HOSTNAME}:${PORT}, or using http://${HOSTNAME}/${SERVICE}
 
