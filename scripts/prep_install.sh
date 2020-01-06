@@ -17,3 +17,5 @@ sudo firewall-cmd --set-default-zone=trusted
 # Disable SELinux because reasons
 echo "Disabling SELinux. This will require a reboot to take effect"
 sudo sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/sysconfig/selinux
+
+# Create download directories
