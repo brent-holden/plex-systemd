@@ -8,6 +8,8 @@ echo -e "\n\n### Setting up Services ###\n\n"
 for SERVICE in "${SERVICES[@]}"; do
 SVCDIR=$OPTDIR/$SERVICE
 
+echo -e "\nSetting up ${SERVICE}"
+
 # Create the service directory
 echo "Creating service directory: $SVCDIR"
 sudo mkdir -p $SVCDIR
@@ -25,6 +27,7 @@ echo "Reloading systemd"
 sudo systemctl daemon-reload
 
 # Enable and start services
+echo -e "\n"
 echo "Enabling and starting $SERVICE"
 sudo systemctl enable $SERVICE
 sudo systemctl start $SERVICE
