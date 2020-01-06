@@ -2,6 +2,12 @@
 
 source variables.sh
 
+echo -e "\n\n### Setting up rClone ###\n\n"
+
+echo "!! You'll need a working rclone configuration to proceed !!"
+echo -e "You can follow the documentation posted at http://rclone.org\n\n" 
+
+
 read -p "Point me to rclone.conf (default value: /root/.config/rclone/rclone.conf): " RCLONECONF
 RCLONECONF=${RCLONECONF:-/root/.config/rclone/rclone.conf}
 

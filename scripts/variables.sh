@@ -3,6 +3,7 @@
 SERVICES=(lidarr sonarr radarr tautulli hydra2 sabnzbd ombi nginx plex)
 DOWNLOADABLES=(movies tv music other)
 DATE=`date +%d-%m-%Y`
+CRONDIR=/etc/cron.d
 OPTDIR=/opt
 TMPDIR=/tmp
 RCLONEDIR=/mnt/rclone

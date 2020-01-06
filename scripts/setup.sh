@@ -9,6 +9,9 @@ source ${BASH_SOURCE%/*}/setup_rclone.sh
 # Setup services
 source ${BASH_SOURCE%/*}/setup_services.sh
 
+# Setup Plex with claim token
+source ${BASH_SOURCE%/*}/setup_plex.sh
+
 # Setup backups
 source ${BASH_SOURCE%/*}/setup_backup.sh
 

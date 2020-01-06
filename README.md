@@ -12,7 +12,11 @@ $ cd plex-scripts
 
 Before running the next commands, you'll need to make sure you have a valid rclone configuration. You can find the instructions on how to do that on the [RClone Drive instructions](https://rclone.org/drive/). I've included an [example rclone configuration file](rclone/rclone.conf.example) for reference in this repository.
 
-The setup_rclone.sh script assumes you're running with access to sudo. This script will create a user 'plex' for you with uid/gid 1100. RClone will have permissions set to allow this user for our rclone drive(s), and on the directories we create in /opt and /mnt
+The setup.sh script assumes you're running with access to sudo. This script will prepare the system for installation of rclone, installing additional services and Plex. To complete the installation, you'll need three things:
+* A working rclone configuration. Your rclone mount must have /Media and /Backups on it. This script will install but but won't configure it for you. You'll need to follow the guide above and provide the configuration file (rclone.conf) during the install.
+* A Plex claim token. You can get this from plex.tv/claim once the script asks for it during installation
+
+
 ```console
 $ ./setup_rclone.sh
 ```

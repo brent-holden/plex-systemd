@@ -2,6 +2,8 @@
 
 source ${BASH_SOURCE%/*}/variables.sh
 
+echo -e "\n\n### Preparing your system ###\n\n"
+
 # Add the plex user and group with specified UID before doing anything
 echo "Adding $PLEXUSER with UID:$PLEXUID"
 sudo adduser $PLEXUSER --uid=$PLEXUID -U
