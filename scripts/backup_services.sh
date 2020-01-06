@@ -43,9 +43,6 @@ sudo mv $TMPDIR/$FILENAME $DESTDIR
 sudo rm $DESTDIR/$LATEST
 sudo cp $DESTDIR/$FILENAME $DESTDIR/$LATEST
 
-# Remove all backups older than 30 days
-sudo find $DESTDIR -type f -name '*.tar.gz' -mtime +30 -exec rm {} \;
-
 done
 
 
