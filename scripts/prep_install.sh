@@ -19,3 +19,15 @@ echo "Disabling SELinux. This will require a reboot to take effect"
 sudo sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/sysconfig/selinux
 
 # Create download directories
+for MEDIATYPE in "${DOWNLOADABLES[@]}"; do
+
+MEDIADIR=$COMPLETEDDIR/$MEDIATYPE
+
+echo "Creating $MEDIADIR"
+sudo mkdir -p $MEDIADIR
+
+echo "Changing permissions on $MEDIADIR to $PLEXUSER.$PLEXGROUP"
+sudo chown -R $PLEXUSER.$PLEXGROUP $MEDIADIR
+
+done
+

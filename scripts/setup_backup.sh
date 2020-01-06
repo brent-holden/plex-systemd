@@ -22,8 +22,12 @@ sudo chown -R $PLEXUSER.$PLEXGROUP $BACKUPDIR
 
 done
 
+# Get current directory of the repo
+REPODIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )
+
 # Setup cronjob
 echo "Copying backup configuration to /etc/cron.d"
+sudo sed -i "s~%%SCRIPT_REPO%%~${REPODIR}~" ${BASH_SOURCE%/*}/../cron/backup-plex
 sudo cp ${BASH_SOURCE%/*}/../cron/backup-plex /etc/cron.d
 sudo systemctl restart crond
 
