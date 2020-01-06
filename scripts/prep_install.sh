@@ -11,6 +11,7 @@ echo "Installing packages: $PACKAGES"
 sudo yum -y install $PACKAGES
 
 # Set default zone to trusted assuming you're on a private net behind a firewall
+echo "Setting FirewallD to live in a trusted zone. Comment this out if you're in a DMZ"
 sudo firewall-cmd --set-default-zone=trusted
 
 # Disable SELinux because reasons
