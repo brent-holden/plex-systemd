@@ -18,4 +18,4 @@ SYSTEMDDIR=/usr/lib/systemd/system
 PLEXUSER=plex
 PLEXGROUP=plex
 PLEXUID=1100
-PACKAGES="rsync vim"
+PACKAGES="rsync vim podman podman-docker"
