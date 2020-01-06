@@ -27,8 +27,8 @@ REPODIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )
 
 # Setup cronjob
 echo "Copying backup configuration to /etc/cron.d"
-sudo sed -i "s~%%SCRIPT_REPO%%~${REPODIR}~" ${BASH_SOURCE%/*}/../cron/backup-plex
-sudo cp ${BASH_SOURCE%/*}/../cron/backup-plex /etc/cron.d
+sudo cp ${BASH_SOURCE%/*}/../cron/backup-plex ${CRONDIR}
+sudo sed -i "s~%%SCRIPT_REPO%%~${REPODIR}~" ${CRONDIR}/backup-plex
 sudo systemctl restart crond
 
 echo "Done setting up backups"
