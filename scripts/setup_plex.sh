@@ -2,6 +2,8 @@
 
 source ${BASH_SOURCE%/*}/variables.sh
 
+echo -e "\n\n### Setting up Plex ###\n\n"
+
 # Get claim token from https://plex.tv/claim
 read -p "Enter your Plex claim token (default value: claim-XXXXX): " CLAIMTOKEN
 CLAIMTOKEN=${CLAIMTOKEN:-claim-XXXXX}

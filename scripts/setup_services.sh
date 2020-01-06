@@ -2,6 +2,8 @@
 
 source ${BASH_SOURCE%/*}/variables.sh
 
+echo -e "\n\n### Setting up Services ###\n\n"
+
 # Loop over services defined
 for SERVICE in "${SERVICES[@]}"; do
 SVCDIR=$OPTDIR/$SERVICE

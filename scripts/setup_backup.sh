@@ -2,6 +2,8 @@
 
 source ${BASH_SOURCE%/*}/variables.sh
 
+echo -e "\n\n### Setting up Backups ###\n\n"
+
 # Test to make sure we're mounted or exit
 if $(mountpoint -q "$RCLONEBACKUPDIR"); then
     echo "$RCLONEBACKUPDIR is mounted. Let's do this!"
