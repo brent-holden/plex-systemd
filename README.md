@@ -76,6 +76,6 @@ Going to https://your.host.name/ will forward you to Ombi
 
 Plex will be available at http://your.host.name:32400/web
 
-If you're not restoring from backups, you'l lneed to log into each service and configure the reverse proxy base URL with /<service> by going to http://your.host.name:<service port>. Service ports are published in the [sample nginx configuration file](nginx/default.example) in this repository. Enjoy!
+If you're not restoring from backups, you'l lneed to log into each service and configure the reverse proxy base URL with /${service} by going to http://your.host.name:${service port}. Service ports are published in the [sample nginx configuration file](nginx/default.example) in this repository. Enjoy!
 
 
