@@ -1,7 +1,9 @@
 # plex-scripts
 This is a collection of scripts and systemd configurations I used to setup Plex and associated services which has been tested on CentOS 7/8
 
-All scripts use 'sudo' and it's presumed you've cloned this repo into an account that has access to sudo, .
+Before running this script, make sure that you have forwarded port 80 to your host, otherwise the letsencrypt container will not be able to verify your hostname. In the future a check may be added to use DNS verification instead of HTTP, but I'm stuck using Namecheap for now, and that's all I have to test with.
+
+All scripts use 'sudo' and it's presumed you've cloned this repo into an account that has access to sudo.
 
 Clone this repository using:
 ```console
