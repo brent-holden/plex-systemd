@@ -22,6 +22,7 @@ The setup.sh script assumes you're running with access to sudo. This script will
 
 
 ```console
+$ cd scripts
 $ ./setup.sh
 ```
 My Google drive has two directories in /, Media and Backups. The rclone-media-drive mounts /Media, and rclone-backup-drive mounts /Backups
