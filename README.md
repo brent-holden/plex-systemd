@@ -34,6 +34,7 @@ mnt/
     │   ├── letsencrypt
     │   ├── lidarr
     │   ├── nginx
+    │   ├── ombi
     │   ├── plex
     │   ├── radarr
     │   ├── sabnzbd
@@ -57,6 +58,7 @@ opt/
 ├── letsencrypt
 ├── lidarr
 ├── nginx
+├── ombi
 ├── plex
 ├── radarr
 ├── rclone
