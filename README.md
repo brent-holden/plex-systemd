@@ -17,6 +17,8 @@ Before running the next commands, you'll need to make sure you have a valid rclo
 The setup.sh script assumes you're running with access to sudo. This script will prepare the system for installation of rclone, installing additional services and Plex. To complete the installation, you'll need three things:
 * A working rclone configuration. Your rclone mount must have /Media and /Backups on it. This script will install but but won't configure it for you. You'll need to follow the guide above and provide the configuration file (rclone.conf) during the install.
 * A Plex claim token. You can get this from plex.tv/claim once the script asks for it during installation
+* Port 80 has been forwarded to your host for ACME certbot. Certbot will fire up every night during backups but won't listen all the time.
+* Google Drive needs to be setup with /Media and /Backups folders in the root directory.
 
 
 ```console
