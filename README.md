@@ -70,13 +70,12 @@ opt/
 Assuming you have backups in the appropriate folders, the restore_services script will look for backup_latest.tar.gz and untar it into the appropriate directory in /opt. If you don't have any backups, it will fail during the untar but will continue and setup all of the systemd service files for you.
 
 
-Once you're done, nginx will be sitting on your host in a reverse proxy configuration. You can access your services via their port using http://${HOSTNAME}:${PORT}, or using http://${HOSTNAME}/${SERVICE}
+Once you're done, nginx will be sitting on your host in a reverse proxy configuration. You can access your services using https://your.host.name/{radarr,sonarr,lidarr,hydra2,sabznbd,tautulli}
 
-As an example, to access Tautulli, you would use:  
-http://your.hostname.here:8181  
-or  
-http://your.hostname.here/tautulli  
+Going to https://your.host.name/ will forward you to Ombi
 
-You'll have to log into each service and configure the reverse proxy base URL. I have included a [sample nginx configuration](nginx/default.example) in this repository. Good luck!
+Plex will be available at http://your.host.name:32400/web
+
+If you're not restoring from backups, you'l lneed to log into each service and configure the reverse proxy base URL with /<service> by going to http://your.host.name:<service port>. Service ports are published in the [sample nginx configuration file](nginx/default.example) in this repository. Enjoy!
 
 
