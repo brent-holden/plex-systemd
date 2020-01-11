@@ -15,8 +15,16 @@ source ${BASH_SOURCE%/*}/setup_plex.sh
 # Setup backups
 source ${BASH_SOURCE%/*}/setup_backup.sh
 
-# Restore services from backups
-source ${BASH_SOURCE%/*}/restore_services.sh
+read -r -p "Would you like to restore service configs from backups? [y/N] " RESPONSE
+case "$RESPONSE" in
+    [yY][eE][sS]|[yY])
+          # Restore services from backups
+          source ${BASH_SOURCE%/*}/restore_services.sh
+        ;;
+    *)
+          echo "Skipping restore process"
+        ;;
+esac
 
 echo -e "\n\n"
 echo "You should now be able to reach all of your services at https://<hostname> using /lidarr, /radarr, /sonarr, etc."
