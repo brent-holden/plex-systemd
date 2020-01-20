@@ -7,7 +7,7 @@ Type=simple
 User=root
 Group=root
 ExecStartPre=-/usr/bin/podman rm -f nginx
-ExecStart=/usr/bin/podman run --security-opt label=disable --name=nginx --mount type=bind,source=/opt/nginx,target=/config,bind-propagation=rslave -e PGID=1100 -e PUID=1100 -e TZ=America/New_York -e URL=foresi.de -e SUBDOMAINS=plex-request,daedalus.lan,wan -e VALIDATION=http --network=host --systemd=false --rm linuxserver/letsencrypt
+ExecStart=/usr/bin/podman run --cap-add=NET_ADMIN --security-opt label=disable --name=nginx --mount type=bind,source=/opt/nginx,target=/config,bind-propagation=rslave -e PGID=1100 -e PUID=1100 -e TZ=America/New_York -e URL=plex-request.eventide.network -e VALIDATION=http --network=host --systemd=false --rm linuxserver/letsencrypt
 ExecStop=/usr/bin/podman stop nginx
 ExecReload=/usr/bin/podman restart nginx
 Restart=always
