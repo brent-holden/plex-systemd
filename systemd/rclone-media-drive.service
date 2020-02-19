@@ -9,7 +9,17 @@ After=network-online.target
 Type=simple
 User=root
 Group=root
-ExecStart=/usr/bin/rclone mount --config /opt/rclone/rclone.conf --vfs-cache-mode writes --allow-other --gid 1100 --uid 1100 --dir-cache-time 96h --cache-info-age 97h --fast-list --cache-db-path /mnt/rclone/cache-db media-cache: /mnt/rclone/media
+ExecStart=/usr/bin/rclone mount \
+	--config /opt/rclone/rclone.conf \
+	--vfs-cache-mode writes \
+	--allow-other \
+	--gid 1100 \
+	--uid 1100 \
+	--dir-cache-time 96h \
+	--cache-info-age 97h \
+	--fast-list \
+	--cache-db-path /mnt/rclone/cache-db \
+	media-cache:/ /mnt/rclone/media
 ExecStop=/bin/fusermount -uz /mnt/rclone/media
 Restart=on-abort
 Type=notify

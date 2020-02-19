@@ -20,9 +20,18 @@ LATEST=backup_latest.tar.gz
 SRCDIR=$OPTDIR/$SERVICE
 DESTDIR=$RCLONEBACKUPDIR/$SERVICE
 
+# Get podman image
+IMAGEID=$(sudo podman ps --filter "name=$SERVICE"  --format "{{.Image}}")
+
 # Stop the service
 echo "Stopping $SERVICE"
 sudo systemctl stop $SERVICE
+
+# Force container deletion (podman BUG?)
+sudo podman rm --storage -f $SERVICE
+
+# Update container
+sudo podman pull $IMAGEID -q
 
 # Change into service directory
 cd $SRCDIR
