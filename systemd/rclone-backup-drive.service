@@ -5,7 +5,7 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
-Type=simple
+Type=notify
 User=root
 Group=root
 ExecStart=/usr/bin/rclone mount \
@@ -19,7 +19,6 @@ ExecStart=/usr/bin/rclone mount \
 	backup-cache:/ /mnt/rclone/backup
 ExecStop=/bin/fusermount -uz /mnt/rclone/backup
 Restart=on-abort
-Type=notify
 
 [Install]
 WantedBy=multi-user.target

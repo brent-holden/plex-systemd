@@ -16,8 +16,8 @@ ExecStart=/usr/bin/podman run \
 	--systemd=false \
 	--security-opt label=disable \
 	--mount type=bind,source=/mnt/downloads,target=/downloads,bind-propagation=rslave \
-	--mount type=bind,source=/opt/lidarr,target=/config \
 	--mount type=bind,source=/mnt/rclone/media/Music,target=/music \
+	--mount type=bind,source=/opt/lidarr,target=/config \
 	-e PGID=1100 \
 	-e PUID=1100 \
 	linuxserver/lidarr
