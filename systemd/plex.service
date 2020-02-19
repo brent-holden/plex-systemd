@@ -9,7 +9,20 @@ Type=simple
 User=root
 Group=root
 ExecStartPre=-/usr/bin/podman rm -f plex
-ExecStart=/usr/bin/podman run --security-opt label=disable --name plex --mount type=bind,source=/mnt/rclone/media,target=/media,ro=true,bind-propagation=rslave --mount type=bind,source=/opt/plex,target=/config -e VERSION=docker -e PLEX_UID=1100 -e PLEX_GID=1100 -e TZ="America/New_York" -e PLEX_CLAIM="%%CLAIM_TOKEN%%" --network=host --systemd=false --rm plexinc/pms-docker:plexpass
+ExecStart=/usr/bin/podman run \
+	--name plex \
+	--rm \
+	--mount type=bind,source=/mnt/rclone/media,target=/media,ro=true,bind-propagation=rslave \
+	--mount type=bind,source=/opt/plex,target=/config \
+	--network=host \
+	--systemd=false \
+	--security-opt label=disable \
+	-e VERSION=docker \
+	-e PLEX_UID=1100 \
+	-e PLEX_GID=1100 \
+	-e TZ="America/New_York" \
+	-e PLEX_CLAIM="%%CLAIM_TOKEN%%" \
+	plexinc/pms-docker:plexpass
 ExecStop=/usr/bin/podman stop plex
 ExecReload=/usr/bin/podman restart plex
 Restart=always

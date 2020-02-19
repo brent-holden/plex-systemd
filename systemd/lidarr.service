@@ -9,7 +9,18 @@ Type=simple
 User=root
 Group=root
 ExecStartPre=-/usr/bin/podman rm -f lidarr
-ExecStart=/usr/bin/podman run --security-opt label=disable --name=lidarr --mount type=bind,source=/mnt/downloads,target=/downloads,bind-propagation=rslave --mount type=bind,source=/opt/lidarr,target=/config --mount type=bind,source=/mnt/rclone/media/Music,target=/music -e PGID=1100 -e PUID=1100 --network=host --systemd=false --rm linuxserver/lidarr
+ExecStart=/usr/bin/podman run \
+	--name=lidarr \
+	--rm \
+	--network=host \
+	--systemd=false \
+	--security-opt label=disable \
+	--mount type=bind,source=/mnt/downloads,target=/downloads,bind-propagation=rslave \
+	--mount type=bind,source=/opt/lidarr,target=/config \
+	--mount type=bind,source=/mnt/rclone/media/Music,target=/music \
+	-e PGID=1100 \
+	-e PUID=1100 \
+	linuxserver/lidarr
 ExecStop=/usr/bin/podman stop lidarr
 ExecReload=/usr/bin/podman restart lidarr
 Restart=always

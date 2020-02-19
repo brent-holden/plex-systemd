@@ -9,7 +9,18 @@ Type=simple
 User=root
 Group=root
 ExecStartPre=-/usr/bin/podman rm -f tautulli
-ExecStart=/usr/bin/podman run --security-opt label=disable --name=tautulli --mount type=bind,source=/opt/tautulli,target=/config --mount type=bind,source='/opt/plex/Library/Application Support/Plex Media Server/Logs',target=/plex_logs,ro=true,bind-propagation=rslave -e TZ=America/New_York -e PGID=1100 -e PUID=1100 --network=host --systemd=false --rm tautulli/tautulli
+ExecStart=/usr/bin/podman run \
+	--name=tautulli \
+	--rm \
+	--network=host \
+	--systemd=false \
+	--security-opt label=disable \
+	--mount type=bind,source=/opt/tautulli,target=/config \
+	--mount type=bind,source='/opt/plex/Library/Application Support/Plex Media Server/Logs',target=/plex_logs,ro=true,bind-propagation=rslave \
+	-e TZ=America/New_York \
+	-e PGID=1100 \
+	-e PUID=1100 \
+	tautulli/tautulli
 ExecStop=/usr/bin/podman stop tautulli
 Restart=always
 

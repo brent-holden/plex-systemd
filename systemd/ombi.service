@@ -7,7 +7,17 @@ Type=simple
 User=root
 Group=root
 ExecStartPre=-/usr/bin/podman rm -f ombi
-ExecStart=/usr/bin/podman run --name=ombi --security-opt label=disable --mount type=bind,source=/opt/ombi,target=/config -e TZ="America/New_York" -e PGID=1100 -e PUID=1100 --network=host --systemd=false --rm linuxserver/ombi
+ExecStart=/usr/bin/podman run \
+	--name=ombi \
+	--rm \
+	--network=host \
+	--systemd=false \
+	--security-opt label=disable \
+	--mount type=bind,source=/opt/ombi,target=/config \
+	-e TZ="America/New_York" \
+	-e PGID=1100 \
+	-e PUID=1100 \
+	linuxserver/ombi
 ExecStop=/usr/bin/podman stop ombi
 ExecReload=/usr/bin/podman restart ombi
 Restart=always

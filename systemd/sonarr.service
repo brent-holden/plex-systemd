@@ -9,7 +9,19 @@ Type=simple
 User=root
 Group=root
 ExecStartPre=-/usr/bin/podman rm -f sonarr
-ExecStart=/usr/bin/podman run --security-opt label=disable --name=sonarr --mount type=bind,source=/mnt/downloads,target=/downloads,bind-propagation=rslave --mount type=bind,source=/opt/sonarr,target=/config --mount type=bind,source=/mnt/rclone/media/TV,target=/tv -v /etc/localtime:/etc/localtime:ro -e PGID=1100 -e PUID=1100 --network=host --systemd=false --rm linuxserver/sonarr
+ExecStart=/usr/bin/podman run \
+	--name=sonarr \
+	--mount type=bind,source=/mnt/downloads,target=/downloads,bind-propagation=rslave \
+	--mount type=bind,source=/opt/sonarr,target=/config \
+	--mount type=bind,source=/mnt/rclone/media/TV,target=/tv \
+	-v /etc/localtime:/etc/localtime:ro \
+	-e PGID=1100 \
+	-e PUID=1100 \
+	--network=host \
+	--systemd=false \
+	--security-opt label=disable \
+	--rm \
+	linuxserver/sonarr
 ExecStop=/usr/bin/podman stop sonarr
 ExecReload=/usr/bin/podman restart sonarr
 Restart=always

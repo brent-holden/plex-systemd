@@ -7,7 +7,24 @@ Type=simple
 User=root
 Group=root
 ExecStartPre=-/usr/bin/podman rm -f nginx
-ExecStart=/usr/bin/podman run --cap-add=NET_ADMIN --security-opt label=disable --name=nginx --mount type=bind,source=/opt/nginx,target=/config,bind-propagation=rslave --mount type=bind,source=/mnt/downloads/complete,target=/mnt/downloads,bind-propagation=rslave -e PGID=1100 -e PUID=1100 -e TZ=America/New_York -e URL=eventide.network -e SUBDOMAINS=plex-request -e ONLY_SUBDOMAINS=true -e EXTRA_DOMAINS=plex-request.foresi.de -e VALIDATION=http --network=host --systemd=false --rm linuxserver/letsencrypt
+ExecStart=/usr/bin/podman run \
+	--name=nginx \
+	--rm \
+	--network=host \
+	--systemd=false \
+	--cap-add=NET_ADMIN \
+	--security-opt label=disable \
+	--mount type=bind,source=/opt/nginx,target=/config,bind-propagation=rslave \
+	--mount type=bind,source=/mnt/downloads/complete,target=/mnt/downloads,bind-propagation=rslave \
+	-e PGID=1100 \
+	-e PUID=1100 \
+	-e TZ=America/New_York \
+	-e URL=eventide.network \
+	-e SUBDOMAINS=plex-request \
+	-e ONLY_SUBDOMAINS=true \
+	-e EXTRA_DOMAINS=plex-request.foresi.de \
+	-e VALIDATION=http \
+	linuxserver/letsencrypt
 ExecStop=/usr/bin/podman stop nginx
 ExecReload=/usr/bin/podman restart nginx
 Restart=always

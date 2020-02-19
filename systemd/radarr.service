@@ -9,7 +9,19 @@ Type=simple
 User=root
 Group=root
 ExecStartPre=-/usr/bin/podman rm -f radarr
-ExecStart=/usr/bin/podman run --name=radarr --security-opt label=disable --mount type=bind,source=/mnt/downloads,target=/downloads,bind-propagation=rslave --mount type=bind,source=/opt/radarr,target=/config --mount type=bind,source=/mnt/rclone/media/Movies,target=/media/movies -v /etc/localtime:/etc/localtime:ro -e PGID=1100 -e PUID=1100 --network=host --systemd=false --rm linuxserver/radarr
+ExecStart=/usr/bin/podman run \
+	--name=radarr \
+	--rm \
+	--network=host \
+	--systemd=false \
+	--security-opt label=disable \
+	--mount type=bind,source=/mnt/downloads,target=/downloads,bind-propagation=rslave \
+	--mount type=bind,source=/opt/radarr,target=/config \
+	--mount type=bind,source=/mnt/rclone/media/Movies,target=/media/movies \
+	-v /etc/localtime:/etc/localtime:ro \
+	-e PGID=1100 \
+	-e PUID=1100 \
+	linuxserver/radarr
 ExecStop=/usr/bin/podman stop radarr
 ExecReload=/usr/bin/podman restart radarr
 Restart=always
