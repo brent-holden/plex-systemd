@@ -11,7 +11,6 @@ ExecStart=/usr/bin/podman run \
 	--name=nginx \
 	--rm \
 	--network=host \
-	--systemd=false \
 	--cap-add=NET_ADMIN \
 	--security-opt label=disable \
 	--mount type=bind,source=/opt/nginx,target=/config,bind-propagation=rslave \

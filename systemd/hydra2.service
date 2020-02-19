@@ -11,7 +11,6 @@ ExecStart=/usr/bin/podman run \
 	--name=hydra2 \
 	--rm \
 	--network=host \
-	--systemd=false \
 	--security-opt label=disable \
 	--mount type=bind,source=/mnt/downloads,target=/downloads,bind-propagation=rslave \
 	--mount type=bind,source=/opt/hydra2,target=/config \

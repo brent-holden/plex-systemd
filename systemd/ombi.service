@@ -11,7 +11,6 @@ ExecStart=/usr/bin/podman run \
 	--name=ombi \
 	--rm \
 	--network=host \
-	--systemd=false \
 	--security-opt label=disable \
 	--mount type=bind,source=/opt/ombi,target=/config \
 	-e TZ="America/New_York" \

@@ -13,7 +13,6 @@ ExecStart=/usr/bin/podman run \
 	--name=tautulli \
 	--rm \
 	--network=host \
-	--systemd=false \
 	--security-opt label=disable \
 	--mount type=bind,source=/opt/tautulli,target=/config \
 	--mount type=bind,source='/opt/plex/Library/Application Support/Plex Media Server/Logs',target=/plex_logs,ro=true,bind-propagation=rslave \

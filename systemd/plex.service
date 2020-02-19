@@ -15,7 +15,6 @@ ExecStart=/usr/bin/podman run \
 	--mount type=bind,source=/mnt/rclone/media,target=/media,ro=true,bind-propagation=rslave \
 	--mount type=bind,source=/opt/plex,target=/config \
 	--network=host \
-	--systemd=false \
 	--security-opt label=disable \
 	-e VERSION=docker \
 	-e PLEX_UID=1100 \
