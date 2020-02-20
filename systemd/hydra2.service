@@ -6,9 +6,10 @@ After=network-online.target
 Type=simple
 User=root
 Group=root
-ExecStartPre=-/usr/bin/podman rm -f hydra2
+ExecStartPre=-/usr/bin/podman rm -f %p
+ExecStartPre=-/usr/bin/podman pull linuxserver/hydra2
 ExecStart=/usr/bin/podman run \
-	--name=hydra2 \
+	--name=%p \
 	--rm \
 	--network=host \
 	--security-opt label=disable \
@@ -17,8 +18,8 @@ ExecStart=/usr/bin/podman run \
 	-e PGID=1100 \
 	-e PUID=1100 \
 	linuxserver/hydra2
-ExecStop=/usr/bin/podman stop hydra2
-ExecReload=/usr/bin/podman restart hydra2
+ExecStop=/usr/bin/podman stop %p
+ExecReload=/usr/bin/podman restart %p
 Restart=always
 
 [Install]

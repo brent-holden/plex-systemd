@@ -6,9 +6,9 @@ After=network-online.target
 Type=simple
 User=root
 Group=root
-ExecStartPre=-/usr/bin/podman rm -f nginx
+ExecStartPre=-/usr/bin/podman rm -f %p
 ExecStart=/usr/bin/podman run \
-	--name=nginx \
+	--name=%p \
 	--rm \
 	--network=host \
 	--cap-add=NET_ADMIN \
@@ -24,8 +24,8 @@ ExecStart=/usr/bin/podman run \
 	-e EXTRA_DOMAINS=plex-request.foresi.de \
 	-e VALIDATION=http \
 	linuxserver/letsencrypt
-ExecStop=/usr/bin/podman stop nginx
-ExecReload=/usr/bin/podman restart nginx
+ExecStop=/usr/bin/podman stop %p
+ExecReload=/usr/bin/podman restart %p
 Restart=always
 
 [Install]

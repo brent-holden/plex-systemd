@@ -8,9 +8,9 @@ BindsTo=rclone-media-drive.service
 Type=simple
 User=root
 Group=root
-ExecStartPre=-/usr/bin/podman rm -f plex
+ExecStartPre=-/usr/bin/podman rm -f %p
 ExecStart=/usr/bin/podman run \
-	--name plex \
+	--name %p \
 	--rm \
 	--mount type=bind,source=/mnt/rclone/media,target=/media,ro=true,bind-propagation=rslave \
 	--mount type=bind,source=/opt/plex,target=/config \
@@ -22,8 +22,8 @@ ExecStart=/usr/bin/podman run \
 	-e TZ="America/New_York" \
 	-e PLEX_CLAIM="%%CLAIM_TOKEN%%" \
 	plexinc/pms-docker:plexpass
-ExecStop=/usr/bin/podman stop plex
-ExecReload=/usr/bin/podman restart plex
+ExecStop=/usr/bin/podman stop %p
+ExecReload=/usr/bin/podman restart %p
 Restart=always
 
 [Install]

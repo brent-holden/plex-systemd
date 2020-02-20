@@ -8,9 +8,9 @@ BindsTo=plex.service
 Type=simple
 User=root
 Group=root
-ExecStartPre=-/usr/bin/podman rm -f tautulli
+ExecStartPre=-/usr/bin/podman rm -f %p
 ExecStart=/usr/bin/podman run \
-	--name=tautulli \
+	--name=%p \
 	--rm \
 	--network=host \
 	--security-opt label=disable \
@@ -20,7 +20,7 @@ ExecStart=/usr/bin/podman run \
 	-e PGID=1100 \
 	-e PUID=1100 \
 	tautulli/tautulli
-ExecStop=/usr/bin/podman stop tautulli
+ExecStop=/usr/bin/podman stop %p
 Restart=always
 
 [Install]

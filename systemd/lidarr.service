@@ -8,9 +8,9 @@ BindsTo=rclone-media-drive.service
 Type=simple
 User=root
 Group=root
-ExecStartPre=-/usr/bin/podman rm -f lidarr
+ExecStartPre=-/usr/bin/podman rm -f %p
 ExecStart=/usr/bin/podman run \
-	--name=lidarr \
+	--name=%p \
 	--rm \
 	--network=host \
 	--security-opt label=disable \
@@ -20,8 +20,8 @@ ExecStart=/usr/bin/podman run \
 	-e PGID=1100 \
 	-e PUID=1100 \
 	linuxserver/lidarr
-ExecStop=/usr/bin/podman stop lidarr
-ExecReload=/usr/bin/podman restart lidarr
+ExecStop=/usr/bin/podman stop %p
+ExecReload=/usr/bin/podman restart %p
 Restart=always
 
 [Install]

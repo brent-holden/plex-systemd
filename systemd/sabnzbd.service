@@ -6,9 +6,9 @@ After=network-online.target
 Type=simple
 User=root
 Group=root
-ExecStartPre=-/usr/bin/podman rm -f sabnzbd
+ExecStartPre=-/usr/bin/podman rm -f %p
 ExecStart=/usr/bin/podman run \
-	--name=sabnzbd \
+	--name=%p \
 	--rm \
 	--network=host \
 	--security-opt label=disable \
@@ -17,8 +17,8 @@ ExecStart=/usr/bin/podman run \
 	-e PGID=1100 \
 	-e PUID=1100 \
 	linuxserver/sabnzbd
-ExecStop=/usr/bin/podman stop sabnzbd
-ExecReload=/usr/bin/podman restart sabnzbd
+ExecStop=/usr/bin/podman stop %p
+ExecReload=/usr/bin/podman restart %p
 Restart=always
 
 [Install]

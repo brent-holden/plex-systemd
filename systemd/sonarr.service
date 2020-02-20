@@ -8,21 +8,21 @@ BindsTo=rclone-media-drive.service
 Type=simple
 User=root
 Group=root
-ExecStartPre=-/usr/bin/podman rm -f sonarr
+ExecStartPre=-/usr/bin/podman rm -f %p
 ExecStart=/usr/bin/podman run \
-	--name=sonarr \
+	--name=%p \
+	--rm \
+	--network=host \
+	--security-opt label=disable \
 	--mount type=bind,source=/mnt/downloads,target=/downloads,bind-propagation=rslave \
 	--mount type=bind,source=/opt/sonarr,target=/config \
 	--mount type=bind,source=/mnt/rclone/media/TV,target=/tv \
 	-v /etc/localtime:/etc/localtime:ro \
 	-e PGID=1100 \
 	-e PUID=1100 \
-	--network=host \
-	--security-opt label=disable \
-	--rm \
 	linuxserver/sonarr
-ExecStop=/usr/bin/podman stop sonarr
-ExecReload=/usr/bin/podman restart sonarr
+ExecStop=/usr/bin/podman stop %p
+ExecReload=/usr/bin/podman restart %p
 Restart=always
 
 [Install]
