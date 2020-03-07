@@ -15,12 +15,17 @@ fi
 # Loop over services defined
 for SERVICE in "${SERVICES[@]}"; do
 
-BACKUPDIR=$RCLONEBACKUPDIR/$SERVICE
+  BACKUPDIR=$RCLONEBACKUPDIR/$SERVICE
 
-# Create backup directory
-echo "Creating $BACKUPDIR"
-sudo mkdir -p $BACKUPDIR
-sudo chown -R $PLEXUSER.$PLEXGROUP $BACKUPDIR
+  if [ -d "$BACKUPDIR" ]; then
+    # Create backup directory
+    echo "Directory $BACKUPDIR not found. Creating."
+    sudo mkdir -p $BACKUPDIR
+  fi
+
+  # Change directory permissions
+  echo "Changing $BACKUPDIR permissions to: $PLEXUSER.$PLEXGROUP"
+  sudo chown -R $PLEXUSER.$PLEXGROUP $BACKUPDIR
 
 done
 
