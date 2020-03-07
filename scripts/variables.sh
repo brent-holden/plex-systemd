@@ -19,4 +19,4 @@ SYSTEMDDIR=/usr/lib/systemd/system
 PLEXUSER=plex
 PLEXGROUP=plex
 PLEXUID=1100
-PACKAGES="rsync vim podman podman-docker podman-remote cockpit cockpit-podman"
+PACKAGES="fuse rsync vim podman podman-docker podman-remote cockpit cockpit-podman"
