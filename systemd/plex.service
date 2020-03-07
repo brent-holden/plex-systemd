@@ -14,6 +14,7 @@ ExecStart=/usr/bin/podman run \
 	--rm \
 	--mount type=bind,source=/mnt/rclone/media,target=/media,ro=true,bind-propagation=rslave \
 	--mount type=bind,source=/opt/plex,target=/config \
+	--mount	type=bind,source=/mnt/transcode,target=/transcode \
 	--network=host \
 	--security-opt label=disable \
 	-e VERSION=docker \
