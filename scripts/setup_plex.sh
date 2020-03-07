@@ -18,7 +18,7 @@ sudo sed -i "s~%%CLAIM_TOKEN%%~${CLAIMTOKEN}~" ${SYSTEMDDIR}/plex.service
 echo "Reloading systemd"
 sudo systemctl daemon-reload
 
-echo "Restarting Plex"
-sudo systemctl restart plex
+#echo "Restarting Plex"
+#sudo systemctl restart plex
 
 echo "Done setting up Plex"
