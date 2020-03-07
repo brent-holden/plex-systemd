@@ -10,15 +10,14 @@ CLAIMTOKEN=${CLAIMTOKEN:-claim-XXXXX}
 
 
 # Setup cronjob
-echo "Copying backup configuration to /etc/cron.d"
+echo "Modifying plex service unit to include claim token $CLAIMTOKEN"
 sudo sed -i "s~%%CLAIM_TOKEN%%~${CLAIMTOKEN}~" ${SYSTEMDDIR}/plex.service
 
-# Reload systemd and restart Plex
-
+# Reload systemd
 echo "Reloading systemd"
 sudo systemctl daemon-reload
 
 #echo "Restarting Plex"
-#sudo systemctl restart plex
+sudo systemctl restart plex
 
 echo "Done setting up Plex"
