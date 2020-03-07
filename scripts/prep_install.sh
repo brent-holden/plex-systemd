@@ -31,5 +31,11 @@ sudo mkdir -p $MEDIADIR
 echo "Changing permissions on $MEDIADIR to $PLEXUSER.$PLEXGROUP"
 sudo chown -R $PLEXUSER.$PLEXGROUP $MEDIADIR
 
+echo "Creating $TRANSCODEDIR"
+sudo mkdir -p $TRANSCODEDIR
+
+echo "Changing permissions on $TRANSCODEDIR to $PLEXUSER.$PLEXGROUP"
+sudo chown -R $PLEXUSER.$PLEXGROUP $TRANSCODEDIR
+
 done
 
