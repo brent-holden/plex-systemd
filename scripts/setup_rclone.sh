@@ -16,9 +16,6 @@ if [ ! -f "$RCLONECONF" ]; then
   exit 1
 fi
 
-echo "Adding $PLEXUSER with UID:$PLEXUID"
-sudo adduser $PLEXUSER --uid=$PLEXUID -U
-
 echo "Making service directories"
 sudo mkdir -p $DOWNLOADSDIR
 sudo mkdir -p $RCLONEMEDIADIR
