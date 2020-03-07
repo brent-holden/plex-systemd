@@ -30,7 +30,7 @@ sudo systemctl daemon-reload
 echo -e "\n"
 echo "Enabling and starting $SERVICE"
 sudo systemctl enable $SERVICE
-sudo systemctl start $SERVICE
+#sudo systemctl start $SERVICE
 
 done
 
