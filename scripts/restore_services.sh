@@ -45,8 +45,8 @@ for SERVICE in "${SERVICES[@]}"; do
   sudo chown -R $PLEXUSER.$PLEXUSER $DESTDIR
 
   # Start service
-  #echo "Starting $SERVICE"
-  #sudo systemctl start $SERVICE
+  echo "Starting $SERVICE"
+  sudo systemctl start $SERVICE
 
 done
 
