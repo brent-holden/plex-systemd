@@ -28,8 +28,8 @@ for SERVICE in "${SERVICES[@]}"; do
 
   # Enable
   echo -e "\n"
-  echo "Enabling $SERVICE"
-  sudo systemctl enable $SERVICE
+  echo "Enabling and starting $SERVICE"
+  sudo systemctl enable --now $SERVICE
 
 done
 
