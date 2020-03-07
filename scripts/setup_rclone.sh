@@ -35,18 +35,8 @@ sudo cp $SYSTEMDSVCFILESDIR/rclone* $SYSTEMDDIR
 sudo systemctl daemon-reload
 
 echo "Enabling and starting rclone services"
-sudo systemctl enable rclone-media-drive
-sudo systemctl start rclone-media-drive
+sudo systemctl enable --now rclone-media-drive
+sudo systemctl enable --now rclone-backup-drive
+sudo systemctl enable --now rclone-web
 
-sudo systemctl enable rclone-backup-drive
-sudo systemctl start rclone-backup-drive
-
-echo "Waiting 5 seconds for rClone to start"
-sleep 5
-
-sudo systemctl enable rclone-web
-sudo systemctl start rclone-web
-
-echo "rClone Installed"
-
-
+echo "rClone Installed!"
