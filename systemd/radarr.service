@@ -8,7 +8,6 @@ BindsTo=rclone-media-drive.service
 Type=simple
 User=root
 Group=root
-ExecStartPre=-/usr/bin/podman rm -f %p
 ExecStart=/usr/bin/podman run \
 	--name=%p \
 	--rm \
@@ -21,7 +20,8 @@ ExecStart=/usr/bin/podman run \
 	-e PGID=1100 \
 	-e PUID=1100 \
 	linuxserver/radarr
-ExecStop=/usr/bin/podman stop %p
+ExecStop=/usr/bin/podman stop -t 3 %p
+ExecStopPost=/usr/bin/podman rm -i -f %p
 ExecReload=/usr/bin/podman restart %p
 Restart=always
 

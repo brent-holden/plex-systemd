@@ -8,10 +8,10 @@ BindsTo=rclone-media-drive.service
 Type=simple
 User=root
 Group=root
-ExecStartPre=-/usr/bin/podman rm -f %p
 ExecStart=/usr/bin/podman run \
 	--name=%p \
 	--rm \
+	--pull always \
 	--network=host \
 	--security-opt label=disable \
 	--mount type=bind,source=/mnt/downloads,target=/downloads,bind-propagation=rslave \
@@ -20,7 +20,8 @@ ExecStart=/usr/bin/podman run \
 	-e PGID=1100 \
 	-e PUID=1100 \
 	linuxserver/lidarr
-ExecStop=/usr/bin/podman stop %p
+ExecStop=/usr/bin/podman stop -t 3 %p
+ExecStopPost=/usr/bin/podman rm -i -f %p
 ExecReload=/usr/bin/podman restart %p
 Restart=always
 

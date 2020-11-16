@@ -8,7 +8,6 @@ BindsTo=rclone-media-drive.service
 Type=simple
 User=root
 Group=root
-ExecStartPre=-/usr/bin/podman rm -f %p
 ExecStart=/usr/bin/podman run \
 	--name %p \
 	--rm \
@@ -21,9 +20,10 @@ ExecStart=/usr/bin/podman run \
 	-e PLEX_UID=1100 \
 	-e PLEX_GID=1100 \
 	-e TZ="America/New_York" \
-	-e PLEX_CLAIM="%%CLAIM_TOKEN%%" \
+	-e PLEX_CLAIM="claim-XXXXX" \
 	plexinc/pms-docker:plexpass
-ExecStop=/usr/bin/podman stop %p
+ExecStop=/usr/bin/podman stop -t 3 %p
+ExecStopPost=/usr/bin/podman rm -i -f %p
 ExecReload=/usr/bin/podman restart %p
 Restart=always
 
