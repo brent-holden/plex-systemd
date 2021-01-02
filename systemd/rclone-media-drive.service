@@ -11,13 +11,19 @@ User=root
 Group=root
 ExecStart=/usr/bin/rclone mount \
 	--config /opt/rclone/rclone.conf \
-	--vfs-cache-mode writes \
+	--vfs-cache-mode full \
+	--vfs-cache-max-age 6h \
+	--buffer-size=128M \
+	--use-mmap \
 	--allow-other \
+	--allow-non-empty \
+	--dir-cache-time 48h \
+	--cache-info-age 48h \
+	--fast-list \
+	--umask 002 \
 	--gid 1100 \
 	--uid 1100 \
-	--dir-cache-time 96h \
-	--cache-info-age 97h \
-	--fast-list \
+	--log-level INFO \
 	--cache-db-path /mnt/rclone/cache-db \
 	media-cache:/ /mnt/rclone/media
 ExecStop=/bin/fusermount -uz /mnt/rclone/media
