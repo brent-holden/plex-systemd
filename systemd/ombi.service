@@ -6,7 +6,6 @@ After=radarr.service lidarr.service sonarr.service
 Type=simple
 User=root
 Group=root
-ExecStartPre=-/usr/bin/podman rm -f %p
 ExecStart=/usr/bin/podman run \
 	--name=%p \
 	--rm \
@@ -16,8 +15,9 @@ ExecStart=/usr/bin/podman run \
 	-e TZ="America/New_York" \
 	-e PGID=1100 \
 	-e PUID=1100 \
-	linuxserver/ombi
-ExecStop=/usr/bin/podman stop %p
+	linuxserver/ombi:v4-preview
+ExecStop=/usr/bin/podman stop -t 3 %p
+ExecStopPost=/usr/bin/podman rm -i -f %p
 ExecReload=/usr/bin/podman restart %p
 Restart=always
 
