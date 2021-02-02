@@ -17,7 +17,7 @@ for SERVICE in "${SERVICES[@]}"; do
 
   BACKUPDIR=$RCLONEBACKUPDIR/$SERVICE
 
-  if [ -d "$BACKUPDIR" ]; then
+  if [ ! -d "$BACKUPDIR" ]; then
     # Create backup directory
     echo "Directory $BACKUPDIR not found. Creating."
     sudo mkdir -p $BACKUPDIR
