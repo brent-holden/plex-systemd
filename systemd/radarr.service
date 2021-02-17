@@ -13,12 +13,12 @@ ExecStart=/usr/bin/podman run \
 	--rm \
 	--network=host \
 	--security-opt label=disable \
-	--mount type=bind,source=/mnt/downloads,target=/downloads,bind-propagation=rslave \
+	--mount type=bind,source=/mnt/downloads,target=/downloads \
 	--mount type=bind,source=/opt/radarr,target=/config \
 	--mount type=bind,source=/mnt/rclone/media/Movies,target=/media/movies \
-	-v /etc/localtime:/etc/localtime:ro \
 	-e PGID=1100 \
 	-e PUID=1100 \
+  -e TZ="America/New_York" \
 	linuxserver/radarr
 ExecStop=/usr/bin/podman stop -t 3 %p
 ExecStopPost=/usr/bin/podman rm -i -f %p
