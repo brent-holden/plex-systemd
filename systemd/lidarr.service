@@ -19,6 +19,7 @@ ExecStart=/usr/bin/podman run \
 	--mount type=bind,source=/mnt/rclone/media/Music,target=/music \
 	-e PGID=1100 \
 	-e PUID=1100 \
+  -e TZ="America/New_York" \
 	linuxserver/lidarr
 ExecStop=/usr/bin/podman stop -t 3 %p
 ExecStopPost=/usr/bin/podman rm -i -f %p
