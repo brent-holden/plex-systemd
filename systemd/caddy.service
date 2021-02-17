@@ -1,0 +1,25 @@
+[Unit]
+Description=Caddy (Reverse Proxy using LetsEncrypt)
+After=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStartPre=-/usr/bin/podman rm -f %p
+ExecStart=/usr/bin/podman run \
+	--name=%p \
+	--rm \
+	--network=host \
+	--security-opt label=disable \
+	--mount type=bind,source=/opt/caddy/config,target=/config \
+	--mount type=bind,source=/opt/caddy/data,target=/data \
+  -v /opt/caddy/Caddyfile:/etc/caddy/Caddyfile \
+	docker.io/caddy:latest
+ExecStop=/usr/bin/podman stop %p
+ExecReload=/usr/bin/podman restart %p
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+WantedBy=tautulli.service sonarr.service lidarr.service radarr.service sabnzbd.service hydra2.service
